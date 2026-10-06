@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Результат — {{ brand.name }}{% endblock %}
+
+{% block content %}
+<section class="result result--{{ result.key }}">
+    <p class="result__label">Ваш результат</p>
+    <h1 class="result__title">{{ result.title }}</h1>
+    <p class="result__text">{{ result.text }}</p>
+
+    <div class="factors">
+        <p class="factors__title">На результат сильнее всего повлияли:</p>
+        <ul class="factors__list">
+            {% for factor in result.factors %}
+            <li>{{ factor }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="disclaimer">
+        <p>{{ disclaimer }}</p>
+    </div>
+
+    <div class="result__actions">
+        <a class="btn btn-secondary" href="{{ url_for('index') }}">Пройти ещё раз</a>
+        <button type="button" class="btn btn-primary" id="consult-btn">Обсудить мой случай</button>
+    </div>
+
+    <p class="consult-message" id="consult-message" hidden>
+        В рабочей версии здесь будет переход к консультации.
+    </p>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+{% endblock %}

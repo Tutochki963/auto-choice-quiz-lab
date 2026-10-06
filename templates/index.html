@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ brand.name }} — тест{% endblock %}
+{% block header %}{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <p class="hero__brand">{{ brand.name }}</p>
+    <h1 class="hero__title">Какой способ покупки автомобиля подходит именно вам?</h1>
+    <p class="hero__subtitle">
+        Ответьте на несколько вопросов. Мы сравним ваши приоритеты и покажем,
+        какой сценарий покупки сейчас выглядит наиболее рациональным.
+    </p>
+
+    <form method="post" action="{{ url_for('start') }}">
+        <button type="submit" class="btn btn-primary btn-lg">Начать</button>
+    </form>
+
+    <p class="hero__meta">7 вопросов · около двух минут · без регистрации и персональных данных</p>
+</section>
+{% endblock %}

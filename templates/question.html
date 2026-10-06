@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Вопрос {{ number }} из {{ total }} — {{ brand.name }}{% endblock %}
+
+{% block content %}
+<section class="quiz">
+    <div class="quiz__progress">
+        <div class="quiz__progress-label">Вопрос {{ number }} из {{ total }}</div>
+        <div class="progress">
+            <div class="progress__fill" style="width: {{ progress_percent }}%"></div>
+        </div>
+    </div>
+
+    <h1 class="quiz__question">{{ q.text }}</h1>
+
+    {% if error %}
+    <p class="form-error" role="alert">{{ error }}</p>
+    {% endif %}
+
+    <form method="post" class="quiz__form">
+        <div class="options">
+            {% for option in q.options %}
+            <label class="option{% if selected == loop.index0 %} is-selected{% endif %}">
+                <input type="radio" name="answer" value="{{ loop.index0 }}"{% if selected == loop.index0 %} checked{% endif %}>
+                <span class="option__text">{{ option.text }}</span>
+            </label>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+            {% if number == total %}Показать результат{% else %}Далее{% endif %}
+        </button>
+    </form>
+
+    <a class="quiz__restart" href="{{ url_for('index') }}">Начать заново</a>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+{% endblock %}
